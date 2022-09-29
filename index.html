@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Привет კულტურა</title>
+    <style>
+        @import url("https://cdn.web-fonts.ge/fonts/dejavu-sans/css/dejavu-sans.min.css");
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        h2,
+        p {
+            margin: 0;
+            font-family: "DejaVu Sans", sans-serif;
+        }
+
+        .fa-solid {
+            color: #ed610f;
+            transform: rotate(180);
+        }
+
+        .header {
+            text-align: center;
+            padding: 32px;
+            color: #ed610f;
+            font-size: 1.3rem;
+        }
+
+        .row {
+            width: 70%;
+            margin: 7% auto;
+            display: -ms-flexbox;
+            /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap;
+            /* IE10 */
+            flex-wrap: wrap;
+        }
+
+        /* Create four equal columns that sits next to each other */
+        .column {
+            flex: calc(100%/3);
+            max-width: calc(100%/3);
+            padding: 0 4px;
+        }
+
+        .column img {
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+        }
+
+        .img_container {
+            position: relative;
+        }
+
+        .img_container p {
+            position: absolute;
+            font-size: 25px;
+            bottom: 5%;
+            color: white;
+            left: 5%;
+            opacity: 0;
+        }
+
+        .img_container :hover+.name {
+            opacity: 1;
+            transition: 4s;
+        }
+
+        .intro {
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+        }
+
+        .each_user_info_common_container {
+            max-width: 800px;
+            padding-top: 100px;
+        }
+
+        .img_container:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .img_container {
+            transition: transform .7s;
+            cursor: pointer;
+        }
+
+        .each_user_info,
+        .each_user_info_common_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .each_user_info_common_container img {
+            width: 60%;
+            padding: 5% 0;
+        }
+
+        .each_user_info {
+            display: none;
+        }
+
+        .back_arrow {
+            font-size: 50px;
+            color: #e05b43;
+            left: 5%;
+            top: 3%;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        .more_story {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .more_story button {
+            cursor: pointer;
+            margin: 4% auto;
+            padding: 1% 2%;
+            color: #000000;
+            font-size: 15px;
+            font-family: 'Ukrainian-Institut', Arial, sans-serif;
+            line-height: 1.55;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-width: 2px;
+            border-radius: 30px;
+            background-color: transparent;
+        }
+
+        .more_story button:hover {
+            background-color: black;
+            color: white;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+
+        .each_user_history_container {
+            display: none;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .hitory {
+            font-size: 1.3rem;
+            padding-bottom: 8%;
+        }
+        .hitory i{
+            display: flex;
+        }
+
+        .video_container {
+            padding-bottom: 5%;
+        }
+
+        footer {
+            margin-bottom: 5%;
+        }
+
+        .authors-container p {
+            font-size: 1.2rem;
+        }
+
+        .authors-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .authors-container:before {
+            border-top: 2px solid #e77454;
+            content: "";
+            display: block;
+            margin: 1rem auto;
+            min-width: 300px;
+        }
+
+        /* Responsive layout - makes a two column-layout instead of four columns */
+
+        @media screen and (max-width: 800px) {
+            .column {
+                -ms-flex: 100%;
+                flex: 100%;
+                max-width: 100%;
+            }
+
+            .intro {
+                width: 70%;
+            }
+
+            .intro p {
+                font-size: 1.3rem;
+            }
+
+            .authors-container h2 {
+                font-size: 1.3rem;
+            }
+
+            .back_arrow {
+                top: 1%;
+            }
+
+            .each_user_info_common_container {
+                padding-top: 80px;
+                width: 85%;
+            }
+
+            .each_user_info_common_container img {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .title {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .row,
+            .intro {
+                width: 85%;
+            }
+
+            iframe {
+                width: 380px;
+                height: 250px;
+            }
+
+            .header {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .hitory {
+                font-size: 1rem;
+            }
+
+            iframe {
+                width: 320px;
+                height: 220px;
+            }
+        }
+
+
+        /*loader*/
+        .loader-holder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background: white;
+            z-index: 1000;
+        }
+
+        .lds-roller {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .lds-roller div {
+            animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            transform-origin: 40px 40px;
+        }
+
+        .lds-roller div:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #d56003;
+            margin: -4px 0 0 -4px;
+        }
+
+        .lds-roller div:nth-child(1) {
+            animation-delay: -0.036s;
+        }
+
+        .lds-roller div:nth-child(1):after {
+            top: 63px;
+            left: 63px;
+        }
+
+        .lds-roller div:nth-child(2) {
+            animation-delay: -0.072s;
+        }
+
+        .lds-roller div:nth-child(2):after {
+            top: 68px;
+            left: 56px;
+        }
+
+        .lds-roller div:nth-child(3) {
+            animation-delay: -0.108s;
+        }
+
+        .lds-roller div:nth-child(3):after {
+            top: 71px;
+            left: 48px;
+        }
+
+        .lds-roller div:nth-child(4) {
+            animation-delay: -0.144s;
+        }
+
+        .lds-roller div:nth-child(4):after {
+            top: 72px;
+            left: 40px;
+        }
+
+        .lds-roller div:nth-child(5) {
+            animation-delay: -0.18s;
+        }
+
+        .lds-roller div:nth-child(5):after {
+            top: 71px;
+            left: 32px;
+        }
+
+        .lds-roller div:nth-child(6) {
+            animation-delay: -0.216s;
+        }
+
+        .lds-roller div:nth-child(6):after {
+            top: 68px;
+            left: 24px;
+        }
+
+        .lds-roller div:nth-child(7) {
+            animation-delay: -0.252s;
+        }
+
+        .lds-roller div:nth-child(7):after {
+            top: 63px;
+            left: 17px;
+        }
+
+        .lds-roller div:nth-child(8) {
+            animation-delay: -0.288s;
+        }
+
+        .lds-roller div:nth-child(8):after {
+            top: 56px;
+            left: 12px;
+        }
+
+        @keyframes lds-roller {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader-holder">
+        <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="header">
+        <h1>Привет კულტურა</h1>
+    </div>
+    <div class="main_container">
+        <div class="intro">
+            <p>
+                2021 წლის მარტში კულტურის სამინისტრო განათლების სამინისტროს გამოეყო და მისი მინისტრი თეა წულუკიანი
+                გახდა. წულუკიანის ხელმძღვანელობის პირველ ერთ წელიწადში სამინისტროდან და მისი დაქვემდებარებული
+                უწყებებიდან ათობით ადამიანი გათავისუფლდა მიმდინარე რეორგანიზაციის პროცესში, ნაწილმა თავად, მინისტრის
+                კულტურის პოლიტიკისადმი პროტესტის ნიშნად დატოვა სამსახური. ათობით ადამიანმა, ვინც თვლის, რომ სამსახურიდან
+                განსხვავებული აზრის, მინისტრთან ოპონირების ან პოლიტიკური შეხედულებების გამო გაათავისუფლეს, საკუთარი
+                უფლებების დასაცავად სასამართლოს მიმართა.
+            </p>
+            <br><br>
+            <p>
+                ეს “ონლაინ გალერეა” განსხვავებული პროფესიების, ინტერესების, ასაკისა და გამოცდილების ადამიანების
+                ისტორიებს აერთიანებს, ვინც მიიჩნევს, რომ უსამართლობის მსხვერპლი გახდა. ამ ამბების უმეტესობა სისტემურ
+                პრობლემებზე მიანიშნებს - მოძველებული სტრუქტურა, პროფესიონალების სიმწირე, მოუქნელობა, სიახლეებისა და
+                ცვლილებების სიმწირე, დაგვიანებული რეფორმები და ხელისუფლების წარმომადგენლები, რომლებიც თვლიან, რომ
+                კულტურას მოთვინიერება სჭირდება. ეს ის საკითხებია, რომლებიც ბევრი წელია განვითარების ხელის შემშლელი
+                ფაქტორებია და რომლებიც ახალი სიმწვავით გააცოცხლა თეა წულუკიანის დანიშვნამ.
+            </p>
+        </div>
+        <!-- Photo Grid -->
+        <div class="row">
+            <div class="column">
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0ff70000-0aff-0242-7356-08da4a1f77da.jpg"
+                        style="width:100%">
+                    <p class="name">დავით ნიორაძე</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f500000-0aff-0242-51be-08da4942346c.jpg"
+                        style="width:100%">
+                    <p class="name">ნინო ჯაყელი </p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/4004d9b2-785e-46b6-b734-3f5fd12b590b.jpg"
+                        style="width:100%">
+                    <p class="name">ეკა კიკნაძე</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/08de0000-0a00-0242-9eec-08da47d72b0f.png"
+                        style="width:100%">
+                    <p class="name">გაგა ჩხეიძე</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f210000-0aff-0242-6fb7-08da47d72b0a.png"
+                        style="width:100%">
+                    <p class="name">ლაშა ჩხვიმიანი</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f500000-0aff-0242-4ce2-08da479bfd3a.jpg"
+                        style="width:100%">
+                    <p class="name">დავით ლორთქიფანიძე</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f500000-0aff-0242-feca-08da4a1f77d5.jpg"
+                        style="width:100%">
+                    <p class="name">ირმა კოპალიანი</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f500000-0aff-0242-eaeb-08da4a1f77e8.jpg"
+                        style="width:100%">
+                    <p class="name">ნინო ხუნდაძე</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/08de0000-0a00-0242-195c-08da476d5ffb.jpeg"
+                        style="width:100%">
+                    <p class="name">ნანა ბურჭულაძე</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f500000-0aff-0242-12c2-08da47d733d1.png"
+                        style="width:100%">
+                    <p class="name">ბესო სოლომანაშვილი</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f210000-0aff-0242-c5ff-08da47db9c82.jpg"
+                        style="width:100%">
+                    <p class="name">ნიკოლოზ წიქარიძე</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f500000-0aff-0242-321a-08da4a1f7983.jpg"
+                        style="width:100%">
+                    <p class="name">გვანცა ბერძენიშვილი</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f210000-0aff-0242-81e0-08da47d73038.png"
+                        style="width:100%">
+                    <p class="name">სალომე ჯაში</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f210000-0aff-0242-5017-08da47d72f26.png"
+                        style="width:100%">
+                    <p class="name">გიორგი გაგოშიძე</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/0f500000-0aff-0242-22a6-08da4a1f78d8.jpg"
+                        style="width:100%">
+                    <p class="name">მიხეილ ჩარკვიანი</p>
+                </div>
+                <div class="img_container">
+                    <img class="user_info_route" src="https://gdb.rferl.org/08de0000-0a00-0242-fe60-08da47ddf19d.jpeg"
+                        style="width:100%">
+                    <p class="name">ანა მგელაძე</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="each_user_history_container">
+        <span class="back_arrow" onClick="window.location.reload();">&#8592;</span>
+
+        <!-- first serction start -->
+        <div class="each_user_info" data_id="0">
+            <div class="each_user_info_common_container">
+                <p class="title">დავით ნიორაძე</p>
+                <p class="subtitle">ხელოვნების მუზეუმის მმართველის ყოფილი თანაშემწე</p>
+                <img src="https://gdb.rferl.org/0ff70000-0aff-0242-7356-08da4a1f77da.jpg">
+                <p class="hitory">
+                    დავით ნიორაძემ მუზეუმში მუშაობის გაგრძელებაზე უარი 2021 წლის ნოემბერში თქვა, იქ გატარებული 6
+                    წლის შემდეგ. <br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        ხელოვნების მუზეუმის ისტორიული შენობის არარენტაბელურად გამოცხადება, მუზეუმიდან საუკეთესო
+                        სპეციალისტების
+                        გათავისუფლება, მუზეუმის რეაბილიტაციის გეგმის არაკვალიფიციური მართვა და ბოლოს ასეთი მასშტაბის
+                        დარტყმა
+                        მეცნიერებაზე, რაც დაფინანსებული კვლევების შეჩერებაში გამოიხატა, არის კულტურული
+                        მემკვიდრეობის, ქვეყნის და
+                        პირადად ჩემი, როგორც ამ ქვეყნის მოქალაქის, უკეთესი მომავლის წინააღმდეგ გადადგმული
+                        ნაბიჯები.<br> <br>
+                        მე არ მინდოდა ვყოფილიყავი იმ გუნდის ნაწილი, რომელსაც არ ვეთანხმებოდი მიდგომაში, რაც მათ აქვთ
+                        სამუზეუმო
+                        საქმის მიმართ.
+                    </i>
+
+                </p>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="1">
+            <div class="each_user_info_common_container">
+                <p class="title">ნინო ჯაყელი </p>
+                <p class="subtitle">ეროვნული მუზეუმის სწავლული მდივანი და ქვის ხანის ფონდის კურატორი</p>
+                <img src="https://gdb.rferl.org/0f500000-0aff-0242-51be-08da4942346c.jpg">
+                <p class="hitory">
+                    არქეოლოგი ნინო ჯაყელი ეროვნულ მუზეუმში 1982 წლიდან მუშაობდა, 2022 წლის 24 მაისამდე. ამ დღეს ნინოსთან
+                    ერთად ეროვნული მუზეუმის 20-ზე მეტი თანამშრომელი თანამშრომელი გაათავისუფლეს სამსახურიდან.<br> <br>
+                    ნინოს გათავისუფლების ბრძანებას ხელს აწერს ეროვნული მუზეუმის დირექტორის პირველი მოადგილე, ნიკა
+                    ახალბედაშვილი - მას ნინომ 17 თებერვალს, საჯაროდ, მედიის თანდასწრებით უთხრა, რომ კულტურის სამინისტრო
+                    მუზეუმის მხარდაჭერის ნაცვლად დაპირისპირების კერებს აღვივებდა ამ სისტემაში. ნინოს გათავისუფლების
+                    ბრძანებაში წერია, რომ მუზეუმის თანამშრომელთა კვალიფიკაციის შემსწავლელმა კომისიამ ის არაკომენტენტურად
+                    მიიჩნია.<br> <br>
+                    გათავისუფლების შემდეგ ნინოსთვის არავის უთქვამს, ვის უნდა გადააბაროს ათასობით ექსპონატისგან შემდგარი
+                    ფონდი, ან რა ბედი ელის იმ კვლევით პროექტებს, რომლებიც უკვე დაფინანსებულია და რომელიც მას მუზეუმის
+                    სხვა, ასევე გათავისუფლებულ თანამშრომლებთან და უცხოელ კოლეგებთან ერთად უნდა განეხორციელებინა.<br>
+                    <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        რაც ამ ქვეყანაში ხდება, ის ხდება მუზეუმში. ნგრევა, მეთოდური ნგრევა. ფასეულობების განადგურება.ეს
+                        იყო ძალიან წარმატებული მუზეუმი, როგორც საგამოფენო, ისე სამეცნიერო და საგანმანათლებლო დაწესებულება,
+                        რომელსაც ანგრევენ. არის ხალხი, ვისაც ეს მოწონს.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/vuK4eFOQVIY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="2">
+            <div class="each_user_info_common_container">
+                <p class="title">ეკა კიკნაძე</p>
+                <p class="subtitle">ხელოვნების მუზეუმისა და ეროვნული გალერეის ყოფილი მმართველი</p>
+                <img src="https://gdb.rferl.org/4004d9b2-785e-46b6-b734-3f5fd12b590b.jpg">
+                <p class="hitory">
+                    ეკა კიკნაძე ხელოვნების მუზეუმისა და ეროვნული გალერეის მმართველი იყო. ის ჯერ ლაბორანტის პოზიციაზე
+                    გადაიყვანეს 2021 წლის 30 ივლისს, 2022 წლის დასაწყისში კი გაათავისუფლეს. ეკა კიკნაძემ მკვლევართა
+                    ჯგუფთან ერთად რუსთაველის სამეცნიერო ფონდის დაფინანსება მოიპოვა, მაგრამ მუზეუმმა უარი თქვა მათ
+                    პროექტზე. 13 დაფინანსებული პროექტიდან მუზეუმმა უარი მხოლოდ ერთზე თქვა, იმაზე, რომლის შემადგენლობაშიც
+                    ხელოვნების მუზეუმიდან გათავისუფლებული თანამშრომლები (ნინო ხუნდაძე, ნანა ბურჭულაძე, დავით ნიორაძე,
+                    დინარა ვაჩნაძე და ეკა კიკნაძე) შედიოდნენ.<br> <br>
+                    ეკა კიკნაძე კულტურის სამინისტროს წინააღმდეგ სასამართლოში დავობს და სახალხო დამცველისგან ითხოვს
+                    დისკრიმინაციის დადგენას მის საქმეში. ეროვნული მუზეუმი მას არ აძლევს იმ დოკუმენტებს, რომლის გაცემის
+                    ვალდებულებაც კანონით აქვს, როგორც საჯარო ინფორმაციის და რაც ეკას სამართლებრივი დავისთვის
+                    სჭირდება.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        ეტყობა, მინისტრმა, რომელსაც ძალიან "ვუყვარვარ", ახალ დირექტორს უთხრა, "ჩამოალაბორანტებო". მას კი
+                        დოჩანაშვილი არ წაუკითხავს და პირდაპირ გაიგო.<br> <br>
+                        ხელოვნების მუზეუმი ყოველთვის იყო ჩაკეტილი და გასაიდუმლოებული… სამეცნიერო შესწავლა, ინტეგრირებული
+                        კვლევა, კოლექციების მოქცევა საერთაშორისო, სამუზეუმო ბაზებსა და სამეცნიერო მიმოქცევაში არის მთავარი
+                        მიზანი, რაც სჭირდება ამ მუზეუმს და სწორედ ამას ეწინააღმდეგებოდნენ ეს ძალები.
+                    </i>
+                </p>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="3">
+            <div class="each_user_info_common_container">
+                <p class="title">გაგა ჩხეიძე</p>
+                <p class="subtitle">ეროვნული კინოცენტრის ყოფილი ხელმძღვანელი, თბილისის კინოფესტივალის ერთ-ერთი
+                    დამფუძნებელი</p>
+                <img src="https://gdb.rferl.org/08de0000-0a00-0242-9eec-08da47d72b0f.png">
+                <p class="hitory">
+                    გაგა ჩხეიძე კინოცენტრის ხელმძღვანელის პოსტიდან 14 მარტს გაათავისუფლეს. სამინისტრო შიდა აუდიტის
+                    დასკვნას დაეყრდნო, რომელიც კინოცენტრში დარღვევებს აღწერდა და პროკურატურაში გადაიგზავნა. გაგა ჩხეიძე
+                    აუდიტის სამსახურის შეხვედრებიდან იხსენებს, როგორ აფრთხილებდნენ მას იმის შესახებ, რომ ყურადღებით
+                    ეცნობოდნენ რას წერდა ფეისბუკზე, და მინისტრთან შეხვედრასაც, სადაც მან უკმაყოფილება გამოთქვა იმის
+                    გამო, რომ კინოცენტრმა დააფინანსა ფილმი ბიძინა ივანიშვილის დენდროლოგიური ბაღის შესახებ. სალომე ჯაშის
+                    ფილმი „მოთვინიერება“ კინოცენტრმა მანამ დააფინანსა, სანამ მისი ხელმძღვანელი გაგა ჩხაიძე
+                    გახდებოდა.<br> <br>
+                    ეროვნული კინოცენტრის ხელმძღვანელად, გაგა ჩხაიძის გათავისუფლების შემდეგ, მინისტრის მოადგილე კარლო
+                    (კახა) სიხარულიძე დაინიშნა სამი წლით. გაგა ჩხეიძემ კულტურის სამინისტროს წინააღმდეგ სამართლებრივი
+                    დავა დაიწყო.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        აუდიტის დასკვნა მას შემდეგ მივიღეთ, რაც მე მომიტანეს განთავისუფლების ბრძანება. მითხრეს, რომ
+                        სამინისტრომ რამდენიმე ასეთი აუდიტი ჩაატარა - ეს არის სამინისტროს შიდა აუდიტი. ამ სამსახურს ჰყავს
+                        ახალი ხელმძღვანელი, რომელიც მინისტრის კადრია. აუდიტის დანიშნულება არის ორგანიზაციის მუშაობის
+                        გაუმჯობესება - ორგანიზაციებს აქვთ უფლება, გაითვალისწინონ მისი რეკომენდაციები ან არა. ჩვენ 18
+                        რეკომენდაცია მოგვცა 2021 წლის სექტემბრის თვეში აუდიტმა და ნაწილი გავითვალისწინეთ, ნაწილი ვერ და არ გავითვალისწინეთ.<br> <br>
+                        აუდიტის დასკვნაში 27 დარღვევაა ჩამოთვლილი და ნათქვამია, რომ მათგან მხოლოდ სამი შეიცავს სისხლის
+                        სამართლის დანაშაულის ნიშნებს. მე ვთვლი, რომ არც ამ სამ შემთხვევაში არ არის სისხლის სამართლის
+                        დანაშაულის ნიშნები. ეს უფრო ჩემი დასჯის თუ დაშინების მცდელობაა.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/8rQ7DAp0mFA"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="4">
+            <div class="each_user_info_common_container">
+                <p class="title">ლაშა ჩხვიმიანი</p>
+                <p class="subtitle">დმანისის თეატრის ყოფილი სამხატვრო ხელმძღვანელი </p>
+                <img src="https://gdb.rferl.org/0f500000-0aff-0242-4563-08da47d72b24.png">
+                <p class="hitory">
+                    ლაშა ჩხვიმიანი ზინაიდა კვერენჩხილაძის სახელობის დმანისის სახელმწიფო დრამატულ თეატრს 2017 წლიდან
+                    ხელმძღვანელობდა - ეს არის ერთადერთი სახელმწიფო თეატრი საქართველოში, რომელსაც არ აქვს საკუთარი შენობა
+                    და არ ჰყავს მუდმივი დასი. მწირი იყო თეატრის ბიუჯეტიც, წელიწადში დაახლოებით 30 000 ლარი.
+                    2019 წელს თეატრმა დადგა ჰენრიკ იბსენის პიესა „ხალხის მტერი“ - ადგილობრივ თვითმმართველობას ეს
+                    სპექტაკლი არ მოეწონა და ლაშას ჩინოვნიკებთან ურთიერთობა გაუფუჭდა. დმანისის მერმა რეჟისორს მისწერა,
+                    რომ „ასეთი იდიოტიზმი აღარ უნდა განმეორებულიყო“, საჯარო სამსახურებში დასაქმებულებს კი დმანისის
+                    თეატრის წარმოდგენებზე მისვლა აეკრძალათ.<br> <br>
+                    2022 წელს თეატრის სამხატვრო ხელმძღვანელის შესარჩევად გამოცხადებულ კონკურსში ლაშა ჩხვიმიანი ერთადერთი
+                    კანდიდატი იყო - 8 თებერვალს მინისტრმა კონკურსი ჩაშლილად გამოაცხადა, დმანისის სამხატვრო ხელმძღვანელად
+                    კი იმავე დღეს დანიშნა გიორგი სიხარულიძე, რომელიც არ მონაწილეობდა კონკურსში. დმანისის თეატრის ბიუჯეტი
+                    26 000 ლარიდან 408 462 ათას ლარამდე გაიზარდა.<br> <br>
+                    ლაშა ჩხვიმიანი კულტურის, სპორტისა და ახალგაზრდობის სამინისტროსა და მინისტრ თეა წულუკიანის მხრიდან
+                    სახალხო დამცველს დისკრიმინაციის დადგენას სთხოვს.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        სამინისტროს მმართველობაში 29 თეატრია, აქედან 21-ში გამოცხადდა კონკურსები და მგონია, ეს არ იყო
+                        რეალური კონკურსები, უფრო წმენდა იყო და გადალაგებ-გადმოლაგება მინისტრის ერთპიროვნული
+                        შეხედულებისამებრ. ძნელია იმაზე ლაპარაკი, რა არ მოეწონა მინისტრს დმანისის თეატრში: კანონი არ
+                        განსაზღვრავს, რა კრიტერიუმებით უნდა იხელმძღვანელოს მინისტრმა მიზანშეწონილად. ჩემს შემთხვევაში ბევრი
+                        ვერსია არსებობს, მაგრამ რეალურ მიზეზს ალბათ ვერ გავიგებთ, ყველაფერი მაინც მარჩიელობა იქნება.როცა
+                        გავიგე 8 თებერვალს, რომ კონკურსი ჩაიშალა და იმ დღეს სხვა დაინიშნა, სანამ საჯაროდ რამეს ვიტყოდი,
+                        მინისტრს პირადად მივწერე ფეისბუკგვერდზე. მან მიპასუხა, თუმცა არ უთქვამს რატომ ჩაიშალა კონკურსი:
+                        მირჩია, დავმშვიდებულიყავი და მითხრა, რომ ახალი სამხატვრო ხელმძღვანელი დიდი რეჟისორია, მის პირობებში
+                        გაჩნდება დასი და მოგვარდება შენობის პრობლემა. ტელეეთერებში თქვა, რომ მე ის არ მიცნობს და მასთან არ
+                        ვყოფილვარ სამინისტროში იმ ათი თვის განმავლობაში, რაც ის მინისტრი იყო. ვერც ეს ვერ გავიგე, რას
+                        ნიშნავდა. როცა ის მინისტრი გახდა, თქვა, რომ ყველა თეატრს პირადად ესტუმრებოდა და ადგილზე გაეცნობოდა
+                        თეატრების პრობლემებს. ჩვენ ველოდებოდით, იმედი გვქონდა, რომ თბილისის თეატრების შემდეგ ყველაზე
+                        გაჭირვებულ თეატრში ჩამოვიდოდა - საბოლოოდ ყველა თეატრს ესტუმრა, დმანისის თეატრის გარდა. დმანისში
+                        მაშინ ჩამოვიდა, როცა მე აღარ ვიყავი სამხატვრო ხელმძღვანელი.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3QPyWENOoMg"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="each_user_info" data_id="5">
+            <div class="each_user_info_common_container">
+                <p class="title">დავით ლორთქიფანიძე</p>
+                <p class="subtitle">ეროვნული მუზეუმის გენერალური დირექტორი</p>
+                <img src="https://gdb.rferl.org/0f500000-0aff-0242-4ce2-08da479bfd3a.jpg">
+                <p class="hitory">
+                    სამუზეუმო სფეროს რეფორმირების პროცესში მკვეთრად შესუსტდა ეროვნული მუზეუმის გენერალური
+                    დირექტორის, დავით ლორთქიფანიძის ხელთ არსებული მართვის ბერკეტები. ის ახლა ვალდებულია, ყველა
+                    გადაწყვეტილება მუზეუმის დირექტორატთან ერთად მიიღოს - დირექტორატი ძირითადად მინისტრის მიერ
+                    დანიშნული კადრებით არის დაკომპლექტებული.<br> <br>
+                    დავით ლორთქიფანიძემ სამუზეუმო სფეროში მიმდინარე ცვლილებებზე საჯაროდ მხოლოდ ერთხელ, ეროვნული
+                    მუზეუმში ისაუბრა მედიასთან - ამ დღეს ის ნიკოლოზ ახალბედაშვილის მხრიდან თავდასხმის სამიზნე გახდა.
+                    ხელოვნების მუზეუმის მაშინდელი დირექტორი, რომელიც ახლა ლორთქიფანიძის მოადგილის თანამდებობას
+                    იკავებს, ლორთქიფანიძეს “მუზეუმის გამოშიგვნაში” ადანაშაულებდა - სწორედ ახალბედაშვილი აწერს ხელს
+                    2022 წლის მაისში ეროვნული მუზეუმიდან მეცნიერების გათავისუფლების ბრძანებს.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        სამსახურიდან დაითხოვეს ძალიან მაღალი რანგის პროფესიონალები. მე იმედი მაქვს გადაწყვეტილებები
+                        შეიცვლება და ეს ადამიანები მუზეუმში დაბრუნდებიან.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/s4tBK_RD_bM"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <!-- first serction end -->
+
+
+        <!-- second section start -->
+        <div class="each_user_info" data_id="6">
+            <div class="each_user_info_common_container">
+                <p class="title">ირმა კოპალიანი</p>
+                <p class="subtitle">ქსოვილებისა და ნაქარგობის განყოფილებაში კურატორის ყოფილი თანაშემწე</p>
+                <img src="https://gdb.rferl.org/03170000-0aff-0242-2d99-08da2f311f0f.jpg">
+                <p class="hitory">
+                    ირმა კოპალიანი ხელოვნების მუზეუმში 2018 წლის 1 ივლისიდან მუშაობდა. სამხატვრო აკადემიის
+                    დასრულების შემდეგ ლექტორების რეკომენდაციით მოხვდა და ორთვიანი სტაჟირების შემდეგ ფონდში დარჩა:
+                    ქსოვილებისა და ნაქარგობის და რუსული ხელოვნების განყოფილებებში. მუზეუმის დირექტორმა, ნიკა
+                    ახალბედაშვილმა ის 2021 წლის 5 ივლისს ახსნა-განმარტების გარეშე გაათავისუფლა. როცა ირმა ამბის
+                    გასარკვევად დირექტორის ოთახში შევიდა, სიტყვიერი და ფიზიკური შეურაცხყოფის მსხვერპლი გახდა.<br> <br>
+                    ირმას შრომითი ხელშეკრულება 3 ივლისამდე ჰქონდა და ამის შემდეგ აღარ გაუგრძელებიათ. ის დღეს ეროვნულ
+                    მუზეუმში მუშაობს.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        2021 წლის 1 ივლისს, ხუთშაბათ დღეს, ნიკა ახალბედაშვილმა დამიბარა კაბინეტში და მიბრძანა, მომდევნო
+                        დღისთვის დამესრულებინა ქსოვილებისა და ნაქარგობის ფონდის პასპორტიზაცია. 700 ექსპონატის
+                        პასპორტიზაცია მქონდა დარჩენილი. ავუხსენი, რომ ორ დღეში ამ საქმის დასრულება წარმოუდგენელი იყო,
+                        მით უმეტეს, როცა რუსულ განყოფილებაშიც ძალიან ბევრი საქმე მქონდა. მან მითხრა, შემეწყვიტა რუსულ
+                        განყოფილებაში მუშაობა, რასაც დავთანხმდი, თუმცა ვუთხარი, რომ პარასკევამდე ქსოვილებისა და
+                        ნაქარგობის ექსპონატთა პასპორტიზაციის დასრულება მაინც ვერ მოხერხდებოდა ფიზიკურად და შევპირდი, რომ
+                        შაბათ-კვირის დღეების გამოყენებით, ორშაბათს აუცილებლად ჩავაბარებდი საბოლოო შედეგს. მართლაც,
+                        ორშაბათ დილითვე გადავეცი დასრულებული ნამუშევარი, რაზეც მადლობა გადამიხადა.<br> <br>
+                        დაახლოებით ორი საათის შემდეგ ნიკა ახალბედაშვილმა დამირეკა და კაბინეტში დამიბარა. მითხრა, რომ
+                        ჩემთვის ცუდი ამბავი ჰქონდა და, როგორც შტატგარეშე თანამშრომელი, უნდა გავეთავისუფლებინე. მიზეზად
+                        უსახსრობა დაასახელა და თქვა, რომ მუზეუმს უწევდა უარის თქმა შტატგარეშე თანამშრომლებზე. ჩემი
+                        ხელფასი მუზეუმში 329 ლარი იყო, მერე გაირკვა, რომ მე ერთადერთი შტატგარეშე თანამშრომელი ვიყავი,
+                        ვისაც ახალი დირექტორი “ემშვიდობებოდა”. მინდოდა გამეგო, რა ნიშნით შემარჩია გასაშვებ კანიდადატურად
+                        და ამ კითხვით შევედი მის ოთახში. ჩანდა, რომ არ ესიამოვნა… მითხრა, რომ ჩემი კითხვიდან ისე ჩანდა,
+                        თითქოს მინდოდა სხვა თანამშრომლებიც გაეშვათ. ამ დღეს პასუხი ვერ მივიღე. ორი დღის შემდეგ გავიგე,
+                        რომ ფონდის კურატორებთან იწუნებდა ჩემს შესრულებულ სამუშაოს. მასთან კიდევ ერთხელ მივედი. როგორც კი
+                        დამინახა, ძალიან დაიძაბა, არ მაცადა საუბარი, მაგიდაზე ხელის დარტყმით, ძალიან აგრესიულად მიყვირა
+                        - „გაეთრიე ოთახიდან!“ მის ყვირილზე დაცვის თანამშრომლები მოვიდნენ, ხელი ჩამავლეს და უხეშად და
+                        ყვირილით დამატოვებინეს მუზეუმის შენობა. ვიჯექი იქვე პარკში, ვტიროდი და თან ჩემ თავზე
+                        ვბრაზდებოდი, რომ გაავებულ ქოფაკთან მივედი მშვიდად სალაპარაკოდ და მჯეროდა, რომ ამას აზრი
+                        ექნებოდა. როგორი ბრიყვი, როგორი ცხვარი აღმოვჩნდი.
+                    </i>
+                </p>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="7">
+            <div class="each_user_info_common_container">
+                <p class="title">ნინო ხუნდაძე</p>
+                <p class="subtitle">ფერწერისა და გრაფიკის ფონდების ყოფილი კურატორი ხელოვნების მუზეუმში </p>
+                <img src="https://gdb.rferl.org/08de0000-0a00-0242-cc93-08da476db4c9.jpg">
+                <p class="hitory">
+                    ნინო ხუნდაძე ხელოვნების მუზეუმიდან 2022 წლის დასაწყისში გაუშვეს, რეორგანიზაციის გამო. ჯერ კიდევ 2021
+                    წლის შემოდგომაზე, როცა მუზეუმი მისმა ახალგაზრდა თანამშრომლებმა პროტესტის ნიშნად დატოვეს, ნინოს
+                    მიაჩნდა, რომ ეს მცდარი არჩევანი იყო. 2021 წლის ბოლოს, გასაუბრებაზე მუზეუმის დირექტორმა, ნიკა
+                    ახალბედაშვილმა ჰკითხა, რატომ არ წერდა მუზეუმის ადმინისტრაციას და კულტურის სამინისტროს წერილებს იმის
+                    შესახებ, რომ მუზეუმის ფონდის რამდენიმე ნამუშევარი ადგილზე არ იყო. ნინო ხუნდაძის თქმით,
+                    ხელმძღვანელობა მუზეუმიდან საუკუნის 50-იან და 80-იან წლებში გატანილ ნამუშევრებს ეძებდა, ექსპონატებს,
+                    რომელთა დაკარგვაც ათწლეულებია ყველასთვის ცნობილი იყო.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        როცა სიცივე იყო, ზედმეტი ქარი ან წვიმა, პირველი, რაზეც ვფიქრობდით - მუზეუმში რა ხდება, და
+                        მივდიოდით. რამდენჯერ ღამეც მივსულვართ იმის სანახავად, რამე ხომ არ აზიანებს ექსპონატებს და ეს
+                        გრძელდებოდა წლები.
+                    </i>
+                </p>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="8">
+            <div class="each_user_info_common_container">
+                <p class="title">ნანა ბურჭულაძე </p>
+                <p class="subtitle">შუა საუკუნეების ქართული ხელოვნების ფონდის ყოფილი მთავარი კურატორი ხელოვნების
+                    მუზეუმში</p>
+                <img src="https://gdb.rferl.org/08de0000-0a00-0242-195c-08da476d5ffb.jpeg">
+                <p class="hitory">
+                    ნანა ბურჭულაძე ხელოვნების მუზეუმში 46 წელი მუშაობდა. თითქმის ყველა პოზიციაზე: გიდი,
+                    მეცნიერ-თანამშრომელი, ფონდების კურატორი. სამსახურიდან 2022 წლის დასაწყისში გაათავისუფლეს.
+                    გათავისუფლებას წინ უძღოდა გასაუბრება, რომელსაც თავად ნანა ბურჭულაძე დაკითხვას უწოდებს. მუზეუმის
+                    ხელმძღვანელობისა და კულტურის სამინისტროს წარმომადგენლებისგან შემდგარმა ჯგუფმა მას ჰკითხა, რატომ არ
+                    მოსწონდა მუზეუმის ახალი ხელმძღვანელობა, ცვლილებები, რომელსაც ისინი გეგმავდნენ, რატომ მონაწილეობდა
+                    აქციებში და აწერდა ხელს პეტიციას, რომელიც ხელოვნების მუზეუმის ევაკუაციასთან დაკავშირებული პროცესის
+                    გასაჯაროებას ითხოვდა.<br> <br>
+                    სამსახურიდან გათავისუფლების შემდეგ მუზეუმის ადმინისტრაციამ ნანა ბურჭულაძეს ერთი დღე მისცა მუზეუმიდან
+                    თავისი ნივთების წასაღებად და მეთვალყურედ დაცვის თანამშრომლები მიუჩინა. ჩაბარგებას ორი დღე დასჭირდა.
+                    ამის შემდეგ მისთვის მუზეუმის კარი დაიკეტა: მინისტრის თანხმობის გარეშე მას შენობაში შესვლა
+                    აეკრძალა.<br> <br>
+                    ნანა ბურჭულაძე თავისი გათავისუფლების ბრძანებას უკანონოდ მიიჩნევს და სასამართლოში ჩივის.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        წლების განმავლობაში შავი პიარი იყო აგორებული მუზეუმის წინააღმდეგ. ამბობდნენ, “გამოშიგნულია
+                        მუზეუმი”, ის “მხოლოდ ქაღალდზეა დარჩენილი”. მე ვმუშაობდი ამ მუზეუმში თითქმის ნახევარი საუკუნის
+                        განმავლობაში, მთელი ჩემი საზოგადოებრივი და პროფესიული საქმიანობა, რომლის დროსაც თავს არ ვზოგავდი,
+                        შეფასდა მავნებლობად. გამოშიგნულობა რას ნიშნავს, რომ მუზეუმში არსებობს ვიღაც გამომშიგვნელი და მე,
+                        ფონდის კურატორი, ამის თანამონაწილე ვარ. ამ ცილისწამებით შექმნეს შთაბეჭდილება, რომ რაც მუზეუმში
+                        ხდება, ის სწორია, ვისაც უშვებენ, ამის ღირსები არიან.<br> <br>
+                        ეს ყველაფერი გავლილი გვაქვს. ჩვენისთანა ადამიანებს კედელთან აყენებდნენ ზუსტად ერთი საუკუნის წინ. ვინ
+                        წარმოიდგენდა, რომ ერთი საუკუნის მერე იმავე საფრთხის წინაშე ვიქნებოდით. გახსოვთ ალბათ, რა
+                        მდგომარეობაში ჰყავდათ ექვთიმე თაყაიშვილი მას შემდეგ, რაც განძი დააბრუნა. ივანე ჯავახიშვილი თავის
+                        აშენებულ უნივერსიტეტის კართან იდგა და შიგნით არ უშვებდნენ. მეც ვიდექი ასე ერთხელ მუზეუმის კართან და
+                        შიგნით არ მიშვებდნენ. მაშინ ვფიქრობდი, რა კარგია, რომ ახლა კარს აქეთ ვდგავარ და არა შიგნით.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/tmy2yoHWKmA"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="9">
+            <div class="each_user_info_common_container">
+                <p class="title">ბესო სოლომანაშვილი</p>
+                <p class="subtitle">რეჟისორი, მწერალი</p>
+                <img src="https://gdb.rferl.org/0f500000-0aff-0242-12c2-08da47d733d1.png">
+                <p class="hitory">
+                    ბესო სოლომანაშვილი ერთ-ერთი წევრი იყო 5-კაციანი საკონკურსო კომისიისა, რომელსაც დებიუტანტ რეჟისორებს
+                    შორის საუკეთესო უნდა ამოერჩია. ეროვნულმა კინოცენტრმა ბესოსთანაც და კომისიის სხვა წევრებთანაც
+                    ხელშეკრულება 2022 წლის 14 თებერვალს გააფორმა. 14 მარტს, კინოცენტრის ხელმძღვანელი შეიცვალა. ახალმა
+                    დირექტორმა, კახა სიხარულიძემ 28 მარტს კომისიის ახალი შემადგენლობა დაამტკიცა ისე, რომ ჟიურის ძველი
+                    წევრებისთვის არაფერი უცნობებია. არც კინოცენტრსა და არც კულტურის სამინისტროს არ გამოუქვეყნებია
+                    ინფორმაცია. დებიუტანტი კონკურსანტები, ვისაც უკვე ჰქონდა გასაუბრება კინოცენტრში, ამბობენ, რომ მათ
+                    გასაუბრება გაიარეს ჟიურისთან, რომლის შემადგენლობაში იყვნენ რეჟისორები გოგა ხაინდრავა, რუსუდან
+                    გლურჯიძე, მერაბ კოკოჩაშვილი, გიორგი ცხვედიანი, გიორგი მეგრელიშვილი, სცენარისტი ირაკლი სამსონაძე და
+                    POST TV-ის წამყვანი, ბაჩო ოდიშარია.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        დღემდე კინოცენტრის საიტზე ჩვენი გვარ-სახელები დევს, ისევ ჩვენ ვართ კომისიის წევრები და
+                        კონკურსანტები ხვდებიან სხვა ადამიანებს. შეურაცხყოფაა. პირდაპირ მეუბნები: „ვინ მიგდიხარ?“<br> <br>
+                        ჩვენი ხელშეკრულებები მოქმედია. ხელშეკრულება იწურება მაშინ, როცა მთავრდება კონკურსი და გამოვლინდება
+                        გამარჯვებულები. თანხის გადახდაც მაშინ ხდება, როცა სამუშაო დასრულებულია.<br> <br>
+                        თუ არ გველაპარაკები საერთოდ, მაშინ ისღა დაგვრჩენია, მივიდეთ სასამართლოში. რა ვერდიქტს გამოიტანს
+                        სასამართლო, არ ვიცი, მაგრამ იმას მაინც გავიგებთ, რა ხდება. თუ პროფესიულად არ გინდა ამის განხილვა,
+                        იძულებული ვარ, მივიდე სასამართლოში და გაიძულო, მითხრა, რომ „აი, შენ რომ გაქვს ეგეთი გარეგნობა, არ
+                        მომწონხარ და აღარ მინდა იყო კომისიის წევრი.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Qa0-eabmTXU"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="10">
+            <div class="each_user_info_common_container">
+                <p class="title">ნიკოლოზ წიქარიძე</p>
+                <p class="subtitle">არქეოლოგი, ეროვნული მუზეუმის უფროსი მეცნიერი-თანამშრომელი</p>
+                <img src="https://gdb.rferl.org/0f210000-0aff-0242-c5ff-08da47db9c82.jpg">
+                <p class="hitory">
+                    არქეოლოგი ნიკოლოზ წიქარიძე ეროვნული მუზეუმის მთავარი მეცნიერ-თანამშრომელი და რამდენიმე არქეოლოგიური
+                    ექსპედიციის ხელმძღვანელი სამსახურიდან 24 მაისს გაათავისუფლეს - ის ფიქრობს, რომ მისი გათავისუფლების
+                    მიზეზი მაისის თვეში დაარსებული მეცნიერების, განათლების და კულტურის პროფესიული კავშირის დაარსება
+                    გახდა, რომლის თავმჯდომარეც თვითონაა.<br> <br>
+                    სამსახურიდან გათავისუფლების მომენტში ნიკოლოზს და მის გუნდს მომდევნო წლებისთვის უკვე მოპოვებული
+                    ჰქონდათ რამდენიმე სამეცნიერო გრანტი, რომლითაც საქართველოს მღვიმეები და მასში უძველესი ადამიანის
+                    ნაკვალევები უნდა შეესწავლათ. მისი გათავისუფლების ბრძანებაში წერია, რომ რომ მუზეუმის თანამშრომელთა
+                    კვალიფიკაციის შემსწავლელმა კომისიამ ის არაკომენტენტურად მიიჩნია. ბრძანებას ხელს ნიკა ახალბედაშვილი
+                    აწერს, ეროვნული მუზეუმის გენერალური დირექტორის მოადგილე.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        თუ ვინმეს ჩემს კვალიფიკაციაში ეჭვი ეპარება, შემიძლია ჩემი CV გავუგზავნო. წელს დაახლოებით 7
+                        პროექტში გავიმარჯვეთ - ჩემი მისია რომ ვუხელმძღვანელო არქეოლოგიურ ექსპედიციებს და მოვიზიდო
+                        პროექტები. ჩემი მაქსიმუმი გავაკეთე - არ არის 7 საერთაშორისო, უმაღლესი რანგის კონკურსში
+                        გამარჯვება.
+                    </i>
+                </p>
+            </div>
+        </div>
+        <!-- second section end -->
+
+
+        <!-- third section start -->
+        <div class="each_user_info" data_id="11">
+            <div class="each_user_info_common_container">
+                <p class="title">გვანცა ბერძენიშვილი</p>
+                <p class="subtitle">ხელოვნებათმცოდნე</p>
+                <img src="https://gdb.rferl.org/03040000-0aff-0242-b46b-08da2f311f09.jpg">
+                <p class="hitory">
+                    გვანცა ბერძენიშვილმა ხელოვნების მუზეუმში მუშაობა 2018 წელს დაიწყო, მეთვალყურედ. მაგისტრატურის
+                    დასრულების შემდეგ ანაზომებისა და ნახაზების ფონდის კურატორის თანაშემწე გახდა. ჩართული იყო სამეცნიერო
+                    სამუშაოებში. დავით ნიორაძესთან ერთად არის ავტორი წიგნისა ანატოლი კალგინის შესახებ, რომლის
+                    ნამუშევრებიც ხელოვნების მუზეუმშია დაცული.<br> <br>
+                    ახლა დოქტორანტურაში სწავლობს და XIX-XX საუკუნეების არქიტექტურაზე მუშაობს. ხელოვნების მუზეუმი 2021
+                    წლის ნოემბერში საკუთარი გადაწყვეტილებით დატოვა.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        რაც ბოლო თვეებში ხელოვნების მუზეუმში დავინახე, მხოლოდ საბჭოთა კავშირის შესახებ დაწერილ წიგნებში
+                        მქონდა წაკითხული. ვიღაც ჩუმად არის, ვიღაცას ეშინია, ვიღაც ხელმძღვანელობასთან “ალაგებს” ურთიერთობას.
+                        საუკეთესო თანამშრომლები გამოუშვეს, ვინც გაჩუმდა, დღეს პრივილეგიებით სარგებლობს. შეიძლება, ვისაც
+                        საბჭოთა კავშირში უცხოვრია, იმისთვის უფრო მარტივია ამის ყურება, მაგრამ მე არ შემეძლო ამ სისტემის
+                        ნაწილი ვყოფილიყავი. დამოუკიდებელ საქართველოში დავიბადე და არ მინდა, ვინმემ საბჭოთა კავშირში ცხოვრება მაიძულოს.<br> <br>
+                        სტუდენტობის დროს და მერეც სულ მესმოდა საუბარი იმაზე, რომ მუზეუმში ახალგაზრდები არ არიან. ხელოვნების
+                        მუზეუმშიც და ეროვნულ მუზეუმშიც ბოლო წლებში ბევრმა ახალგაზრდამ დაიწყო მუშაობა. სამწუხაროდ, ბოლო
+                        ახალგაზრდა ახლა წამოვიდა მუზეუმიდან, რამდენიმე დღის წინ - ახლა ნამდვილად აღარ არიან ახალგაზრდები იქ.<br> <br>
+                        არ იყო მარტივი 329-ლარიან ხელფასზე მუშაობა დანგრეულ შენობაში, სადაც არც გათბობაა, არც გაგრილების
+                        სისტემა, მტვრითაა დაფარული ყველაფერი, სველი წერტილები შენობის გარეთაა და კედლებს ბზარები აქვს,
+                        მაგრამ გვქონდა იმის შეგრძნება, რომ მნიშვნელოვან საქმეს ვაკეთებდით, რომელიც გვიყვარდა. როცა ნიკა
+                        ახალბედაშვილი მოვიდა დირექტორად, თქვა, რომ ჩვენ გავაკეთებთ იმას, რაც 17 წელი არ გაკეთებულა. 17 წელი
+                        მე იქ არ ვმუშაობდი, მაგრამ სამი წელი ვმუშაობდი და ეს განცხადება ჩემი შეურაცხყოფაც იყო.
+                    </i>
+                </p>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="12">
+            <div class="each_user_info_common_container">
+                <p class="title">სალომე ჯაში</p>
+                <p class="subtitle">რეჟისორი, პროდიუსერი </p>
+                <img src="https://gdb.rferl.org/0f210000-0aff-0242-81e0-08da47d73038.png">
+                <p class="hitory">
+                    „მოთვინიერება“ სალომე ჯაშის ბოლო დოკუმენტური ფილმია, რომელიც ეკრანებზე 2021 წელს გამოვიდა. ფილმი
+                    ბიძინა ივანიშვილის დენდროლოგიური ბაღისთვის ხეების შეგროვების პროცესს ასახავს და ნაწილობრივ ეროვნული
+                    კინოცენტრის დაფინანსებით არის გადაღებული.<br> <br>
+                    „მოთვინიერების“ დაგეგმილი ჩვენებები საქართველოს კინოაკადემიამ 2022 წლის აპრილის თვეში გააუქმა და ეს
+                    გადაწყვეტილება ფილმის შინაარსით ახსნა, რომელიც კინოაკადემიის ხელმძღვანელის განმარტებით, მაყურებელში
+                    აზრთა სხვადასხვაობას იწვევდა. კინოს სახლში ჩვენებების გაუქმების შემდეგ სხვადასხვა სივრცეში
+                    “მოთვინიერების” ათობით ჩვენება გაიმართა.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        ჩემთვის პირადად არავის არ უთქვამს სამინისტროდან ფილმზე, ხმები მოდიოდა და მომდის, რომ მინისტრი არ
+                        იყო კმაყოფილი ჩემი ფილმის გამოსვლით. ფილმებს თავისთავად არ ვაკეთებთ იმისთვის, რომ რომელიმე მინისტრი იყოს კმაყოფილი.<br> <br>
+                        ჩვენ არ ვიცით, რისი შექმნა უნდა მას. ვნახეთ რაღაც ვიდეოთამაშის მონახაზი - არცერთი ახალგაზრდა
+                        ამას არ ითამაშებს. გადაყრილი ფულია. ის არ შეასრულებს თავის დანიშნულებას, ეროვნულ სულისკვეთებას არ
+                        გააღვივებს. ვიცით, რომ უნდათ დავით აღმაშენებელზე ფილმის გადაღება. დავით აღმაშენებელზე ფილმის
+                        გადაღებაც არ ნიშნავს ეროვნული სულისკვეთების გაღვივებას. რა არის საერთოდ ეროვნული სულისკვეთება?
+                        რა არის ეროვნული პროდუქტი? ძალიან ბევრი კითხვა ჩნდება ღირებულებებზე. ჩემი აზრით, ეს სამინისტრო არ
+                        არის კულტურული ღირებულებების მატარებელი.<br> <br>
+                        ეს დესტრუქციული პოლიტიკა, შეიძლება დღეს ვინმეს არ ეხება, მაგრამ აუცილებლად ყველა დამოუკიდებელ
+                        ხელოვანს მიუკაკუნებს რაღაც დროს კარზე.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/g-ZAbBs3z54"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="13">
+            <div class="each_user_info_common_container">
+                <p class="title">გიორგი გაგოშიძე</p>
+                <p class="subtitle">ხელოვნებათმცოდნე </p>
+                <img src="https://gdb.rferl.org/0f210000-0aff-0242-5017-08da47d72f26.png">
+                <p class="hitory">
+                    გიორგი გაგოშიძე სამსახურიდან 2022 წლის 14 იანვარს გაათავისუფლეს კულტურული მემკვიდრეობის ეროვნული
+                    სააგენტოდან. ბრძანება ელექტრონულ ფოსტაზე გაუგზავნეს ისე, რომ გათავისუფლების მიზეზები არ განუმარტავთ.
+                    კულტურული მემკვიდრეობის კვლევის სამსახურში რეორგანიზაცია მხოლოდ მას შეეხო. <br> <br>
+                    გიორგი გაგოშიძე 1981 წლიდან ხელოვნების მუზეუმში მუშაობდა. აქვე მუშაობდა მისი შვილი, სოფო გაგოშიძე,
+                    რომელიც ერთ-ერთი პირველი იყო, ვინც ხელოვნების მუზეუმის ახალმა დირექტორმა, ნიკა ახალბედაშვილმა
+                    სამსახურიდან გაათავისუფლა. გიორგი გაგოშიძე და მისი ოჯახი კულტურის მინისტრისა და მისი გუნდის
+                    წევრებისთვის დისკრედიტაციის სამიზნე გახდნენ. თეა წულუკიანმა რამდენიმე ინტერვიუში ახსენა
+                    „გაგოშიძეების კლანი“, მისი გარემოცვის წევრები ფეისბუკში ავრცელებდნენ გიორგი გაგოშიძის ანტისაოკუპაციო
+                    აქციაზე გადაღებულ ფოტოსაც იმის დასტურად, რომ ის წინა ხელისუფლების მხარდამჭერია. <br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        ძალიან ძნელია სახელმწიფოსთან ბრძოლა. ძალიან ბევრი მექანიზმი აქვს სახელმწიფო მანქანას და ადვილად გჩაგრავს. <br> <br>
+                        კულტურის მინისტრი გადაცემებში სულ ჩემს გვარს ახსენებს. ისეთ მიუღებელ რაღაცებს იძახის, ჩემი
+                        შვილების სახელებს ახსენებს. არ ვიცი, რატომ თვლიან, რომ მამიდან შვილზე პროფესია არ უნდა გადადიოდეს. რა
+                        არის დანაშაული იმაში, რომ მამაჩემი არქეოლოგია, მე ხელოვნებათმცოდნე და ჩემი შვილებიდან ერთი არქეოლოგია
+                        და მეორე ხელოვნებათმცოდნე? სად უნდა გვემუშავა ამ პროფესიებით, თუ არა მუზეუმში? <br> <br>
+                        მეც, მამაჩემსაც და ჩემს შვილებსაც, ყველას ძალიან გვიყვარს ჩვენი საქმე. ეს არის ჩვენი ცხოვრების
+                        წესი. მხოლოდ ინტერესის, ახლის გაგების სურვილის გამო თუ იქნები ადამიანი მეცნიერი, მეცნიერებს დიდი
+                        შემოსავალი ამ ქვეყანაში არასოდეს ქონიათ, ეს კომპენსირდება აღმოჩენების სიხარულით. ახალგაზრდები
+                        უფრო და უფრო ცოტა მიდიან ჰუმანიტარულ მეცნიერებებში და როცა შენ მუზეუმში მისულ ახალგაზრდა ადამიანს
+                        ათავისუფლებ, ეს ძალიან ცუდი საქმეა… მაინც დროებითი მგონია ეს ყველაფერი. პროგრესს ვერავინ
+                        გააჩერებს.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/FyA4_wSDqHY"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="14">
+            <div class="each_user_info_common_container">
+                <p class="title">მიხეილ ჩარკვიანი</p>
+                <p class="subtitle">თეატრის რეჟისორი </p>
+                <img src="https://gdb.rferl.org/0f210000-0aff-0242-701f-08da477074f0.jpg">
+                <p class="hitory">
+                    მიხეილ ჩარკვიანი 2018 წლიდან მუშაობდა ქუთაისის სახელმწიფო თეატრში, არის დამოუკიდებელი სახელოვნებო
+                    კომპანია „ღია სივრცის“ ერთ-ერთი დამფუძნებელი. ადგილობრივი მსახიობების მიწვევით 2018 წელს დადაგა
+                    სპექტაკლი „ჰეკაბე“ და გადაწყვიტა, ბედი ეცადა სამხატვრო ხელმძღვანელებისთვის გამოცხადებულ კონკურსში.
+                    თეატრის განვითარების პროგრამას 2 წლის განმავლობაში წერდა სხვადასხვა დარგის სპეციალისტებთან ერთად.
+                    მას თეატრის მულტიფუნქციურ კულტურულ ცენტრად გარდაქმნა სურდა. მიხეილ ჩარკვიანის პროგრამა არ
+                    განუხილავთ, იგი ასაკისა და მართვის გამოცდილების არქონის გამო დაიწუნეს. მიხეილ ჩარკვიანი სახალხო
+                    დამცველს სთხოვს დაადგინოს ასაკობრივი დისკრიმინაცია მის საქმეში.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        მე ვთვლი, რომ კულტურის სამინისტროს დღეს ეშინია ადამიანების, რომლებსაც შეიძლება ჰქონდეს უფრო
+                        სახელმწიფოებრივი ინტერესები და ნაკლებად პარტიული. ამ ორი რამის გამიჯვნა ერთმანეთისგან ძალიან
+                        მნიშვნელოვანი და საჭიროა. მე ვფიქრობ, რომ სახელმწიფო თეატრი სახელმწიფოს ინტერესებს უნდა
+                        ემსახურებოდეს და სახელმწიფო ვართ ჩვენ, ხალხი, ვინც ვაფინანსებთ მას ჩვენი გადასახადებით.<br> <br>
+                        ჩემს შემთხვევაში თქვეს, რომ მე არ მაქვს მილიონიანი ბიუჯეტის მართვის გამოცდილება და ვარ  ახალგაზრდა.
+                        ეს მართალია, მე ვარ 32 წლის და მართლაც არასოდეს მქონია მილიონი. ვერ გექნება მილიონიანი ბიუჯეტის
+                        მართვის გამოცდილება, თუკი ეს შესაძლებლობა არ მოგეცემა. ქუთაისის თეატრს ყოველთვის ძალიან დიდი ბიუჯეტი
+                        ჰქონდა… ეს ფული იხარჯება არასწორ სამხატვრო პოლიტიკაში, არც თეატრის ტექნიკური და არც შემოქმედებითი
+                        რესურსი სათანადოდ არ არის გამოყენებული და ჩვენ ვიღებთ ძალიან დაბალი ხარისხის პროდუქტს.<br> <br>
+                        ჩემს პროგრამაში ნათლად ჩანდა, რომ ვაპირებდი სამოქალაქო საზოგადოების გაძლიერებას და ამ პლატფორმის
+                        მისთვის დათმობას და, როგორც ჩანს, ეს საშიშად მიიჩნიეს.<br> <br>
+                        ისე დალაგდა ყველაფერი, რომ მინისტრს თუ არ მოსწონხარ, ეს არის კომპლიმენტი. ეს ძალიან სამწუხაროა და
+                        ცუდია. არ შეიძლება, კულტურის სამინისტროსთან თანამშრომლობა გეთაკილებოდეს ადამიანს და მუდამ
+                        ბოიკოტირებაზე ფიქრობდე. კულტურის მინისტრი არ არის კულტურის სამინისტრო და ეს სამინისტროს უნდა
+                        ესმოდეს.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/pE-EQ139Zp8"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="each_user_info" data_id="15">
+            <div class="each_user_info_common_container">
+                <p class="title">ანა მგელაძე</p>
+                <p class="subtitle">არქეოლოგი, ანთროპოლოგი</p>
+                <img src="https://gdb.rferl.org/0f500000-0aff-0242-09b3-08da47ddf18f.jpeg">
+                <p class="hitory">
+                    ანა ეროვნულ მუზეუმში თითქმის 20 წლის განმავლობაში მუშაობდა - იყო არაერთი საერთაშორისო გამოფენის
+                    ორგანიზატორი და სამეცნიერო კვლევითი პროექტის მონაწილე. ერთ-ერთი პროექტი, რუსთაველის ეროვნული
+                    სამეცნიერო ფონდის მიერ დაფინანსებული კვლევა, რომელზეც მას მომდევნო სამი წლის განმავლობაში უნდა
+                    ემუშავა ეროვნული მუზეუმის სხვა თანამშრომლებთან ერთად, 2022 წლის თებერვალში შეაჩერა მუზეუმის
+                    გენერალური დირექტორის მოადგილემ, ნიკა ახალბედაშვილმა.<br> <br>
+                    ანას გათავისუფლების ბრძანებაში უწერია, რომ გათავისუფლების მიზეზი მისი დაბალი კვალიფიკაციაა, თუმცა
+                    მუზეუმის ეზოში შემხვედრით შეხვედრისას ანას ნიკა ახალბედაშვილმა უთხრა, რომ დებოშისა და საბოტაჟისთვის
+                    გაათავისუფლა. ანას საბოტაჟი იყო თებერვლის თვეში მისთვის დასმული კითხვა შეჩერებულ სამეცნიერო
+                    პროექტებთან დაკავშირებით. ანას პრესტიჟულ საერთაშორისო ჟურნალებში ათობით სამეცნიერო სტატია აქვს
+                    გამოქვეყნებული და ერთ-ერთ მოწინავე ადგილზეა ციტირების ინდექსით ქართველ მეცნიერებს შორის. ანას
+                    მუზეუმიდან გათავისუფლების შემდეგ მისი მუზეუმში დაბრუნების მოთხოვნით პეტიცია შეადგინეს მისმა
+                    სტუდენტება - ამ პეტიციას ასობით ახალგაზრდამ მოაწერა ხელი.<br> <br>
+                    <i>
+                        <i class="fa-solid fa-quote-left fa-lg"></i> 
+                        როდესაც ეროვნული გალერეადან და ხელოვნების მუზეუმიდან გაათავისუფლეს იქ მომუშავე სპეციალისტები,
+                        ჩემთვის ძვირფასი ადამიანები, მე ჯერ კიდევ მჯეროდა გულუბრყვილოდ, რომ კულტურის მინისტრთან და მის
+                        გუნდთან შეიძლებოდა გამონახულიყო საერთო ენა და გვეკეთებინა ის საქმე, რაც მე მაგალითად ძალიან მიყვარს.
+                        ახლა ძალიან მეცინება ჩვენს გულუბრყვილობაზე. მე არათუ სამსახურიდან გამათავისუფლეს, მუშაობა
+                        ამიკრძალეს. პირველი ივნისიდან მუზეუმის დაცვას აქვს სია გათავისუფლებული თანამშრომლების და
+                        ბრძანება,რომ ჩვენ ვიზიტორებადაც კი არ შეგვიშვან შენობაში.
+                    </i>
+                </p>
+                <div class="video_container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/QmrXICMFqdQ"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <!-- third section end -->
+
+        <div class="more_story">
+            <button onClick="window.location.reload();">სხვა ისტორიები</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="authors-container">
+            <h2>პროექტის ავტორი </h2>
+            <p>ნასტასია არაბული </p> <br>
+            <h2>ფოტო </h2>
+            <p>მზია საგანელიძე</p><br>
+            <h2>ვიდეო</h2>
+            <p>ილია რატიანი</p>
+            <p>დიმიტრი მახარაშვილი</p><br>
+            <h2>რედაქტორი </h2>
+            <p>ნინო ჯაფიაშვილი </p><br>
+            <h2>ვებ-დეველოპერი</h2>
+            <p>სოფიკო ფხიკიძე</p>
+        </div>
+
+    </footer>
+
+
+
+    <script>
+        const user = document.getElementsByClassName("user_info_route");
+        const eachUserInfo = document.querySelectorAll(".each_user_info");
+        let getUserId;
+        let eachUserInfoSectionId;
+
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            setTimeout(() => {
+                $(".loader-holder").css("display", "none");
+            }, 1000);
+            clickForVideo();
+            setId()
+        });
+
+        function clickForVideo() {
+            $(user).click(function () {
+                getUserId = $(this).attr("id")
+                for (let i = 0; i < eachUserInfo.length; i++) {
+                    eachUserInfoSectionId = $(eachUserInfo[i]).attr("data_id")
+                    if (getUserId === eachUserInfoSectionId) {
+                        $('.main_container').hide();
+                        $('.each_user_history_container').show();
+                        $(`[data_id='${eachUserInfoSectionId}']`).css("display", "flex");
+                        $('.header').hide()
+                        $("footer").hide()
+                    }
+                }
+
+            });
+        }
+
+        function setId() {
+            let user = document.querySelectorAll(".user_info_route");
+            let userHistory = document.querySelectorAll(".each_user_info");
+
+            for (let i = 0; i < user.length; i++) {
+                user[i].setAttribute('id', i);
+            }
+            for (let i = 0; i < userHistory.length; i++) {
+                // userHistory[i].setAttribute('data_id',i);
+            }
+        }
+        $(".back_arrow").click(function () {
+            // setTimeout(() => {
+            //     $(".loader-holder").css("display", "none");
+            // }, 1000);
+        });
+    </script>
+</body>
+
+</html>
